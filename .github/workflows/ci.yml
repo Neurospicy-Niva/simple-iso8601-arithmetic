@@ -81,13 +81,13 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
       
-    - name: Publish to Maven Central
+    - name: Publish & Release on Maven Central
       env:
-        ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
-        ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-        ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGPASSWORD }}
-        ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEY }}
-      run: ./gradlew publishAllPublicationsToSonatypeRepository
+        ORG_GRADLE_PROJECT_sonatypeUsername:   ${{ secrets.SONATYPE_USERNAME }}
+        ORG_GRADLE_PROJECT_sonatypePassword:   ${{ secrets.SONATYPE_PASSWORD }}
+        ORG_GRADLE_PROJECT_signingKey:         ${{ secrets.SIGNING_SECRET_KEY }}
+        ORG_GRADLE_PROJECT_signingPassword:    ${{ secrets.SIGNING_PASSWORD }}
+      run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
         
   publish-github:
     needs: [test, build]

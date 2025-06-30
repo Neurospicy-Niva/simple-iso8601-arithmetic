@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
     signing
     jacoco
-    id("org.jreleaser") version "1.17.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
 group = "icu.neurospicy"
@@ -85,15 +85,14 @@ publishing {
     
     repositories {
         maven {
-            val releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            val snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            val releaseRepo = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
+            val snapshotRepo = "https://central.sonatype.com/repository/maven-snapshots/"
+
             name = "sonatype"
             url = uri(if(!project.version.toString().endsWith("SNAPSHOT")) releaseRepo else snapshotRepo)
-            val sonatypeUsername: String? by project
-            val sonatypePassword: String? by project
             credentials {
-                username = sonatypeUsername
-                password = sonatypePassword
+                username = project.findProperty("sonatypeUsername") as String? ?: System.getenv("SONATYPE_USERNAME")
+                password = project.findProperty("sonatypePassword") as String? ?: System.getenv("SONATYPE_PASSWORD")
             }
         }
         maven {
@@ -107,11 +106,25 @@ publishing {
     }
 }
 
+nexusPublishing {
+    // Endpunkte des Portals (du nutzt sie bereits):
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+        }
+    }
+}
+
 signing {
     val signingKey: String? by project
     val signingPassword: String? by project
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["maven"])
+}
+
+tasks.withType<Sign>().configureEach {
+    onlyIf { project.findProperty("signingKey") != null }
 }
 
 tasks.wrapper {
