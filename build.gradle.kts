@@ -4,6 +4,7 @@ plugins {
     `maven-publish`
     signing
     jacoco
+    id("org.jreleaser") version "1.17.0"
 }
 
 group = "icu.neurospicy"
@@ -54,29 +55,29 @@ publishing {
             from(components["java"])
             
             pom {
-                name.set("Simple ISO 8601 Arithmetic")
-                description.set("A lightweight Kotlin library for parsing and evaluating time arithmetic expressions using ISO 8601 format")
-                url.set("https://github.com/neurospicy-niva/simple-iso8601-arithmetic")
+                name = "Simple ISO 8601 Arithmetic"
+                description = "A lightweight Kotlin library for parsing and evaluating time arithmetic expressions using ISO 8601 format"
+                url = "https://github.com/neurospicy-niva/simple-iso8601-arithmetic"
                 
                 licenses {
                     license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
                     }
                 }
                 
                 developers {
                     developer {
-                        id.set("steineggerroland")
-                        name.set("Roland Steinegger")
-                        email.set("roland@neurospicy.icu")
+                        id = "steineggerroland"
+                        name = "Roland Steinegger"
+                        email = "roland@neurospicy.icu"
                     }
                 }
                 
                 scm {
-                    connection.set("scm:git:git://github.com/neurospicy-niva/simple-iso8601-arithmetic.git")
-                    developerConnection.set("scm:git:ssh://github.com/neurospicy-niva/simple-iso8601-arithmetic.git")
-                    url.set("https://github.com/neurospicy-niva/simple-iso8601-arithmetic")
+                    connection = "scm:git:git://github.com/neurospicy-niva/simple-iso8601-arithmetic.git"
+                    developerConnection = "scm:git:ssh://github.com/neurospicy-niva/simple-iso8601-arithmetic.git"
+                    url = "https://github.com/neurospicy-niva/simple-iso8601-arithmetic"
                 }
             }
         }
