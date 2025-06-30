@@ -1,6 +1,6 @@
 # Simple ISO 8601 Arithmetic
 
-[![CI/CD](https://github.com/steineggerroland/simple-iso8601-arithmetic/actions/workflows/ci.yml/badge.svg)](https://github.com/steineggerroland/simple-iso8601-arithmetic/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/neurospicy-niva/simple-iso8601-arithmetic/actions/workflows/ci.yml/badge.svg)](https://github.com/steineggerroland/simple-iso8601-arithmetic/actions/workflows/ci.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/icu.neurospicy/simple-iso8601-arithmetic.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22icu.neurospicy%22%20AND%20a:%22simple-iso8601-arithmetic%22)
 
 A lightweight Kotlin library for parsing and evaluating time arithmetic expressions using ISO 8601 format.
